@@ -68,3 +68,41 @@ void	parse_map_contents(t_data *data)
 	free(map_input);
 	calc_map_width_height(data);
 }
+
+
+int	color_atoi(const char *str)
+{
+	int	i;
+	int	num;
+	int	sign;
+
+	num = 0;
+	i = 0;
+	sign = 1;
+	while (str[i] == ' ' || str[i] == '\t' || str[i] \
+	== '\v' || str[i] == '\f')
+		i++;
+	if (str[i] == '-')
+		sign = -1;
+	while (str[i] != '\0')
+	{
+		if (!ft_isdigit(str[i]))
+			return (-1);
+		num = (num * 10) + (str[i] - '0');
+		i++;
+	}
+	free ((char *)str);
+	if (i > 5 || num > 255 || sign < 0)
+		return (-1);
+	return ((int)(num * sign));
+}
+
+int	ft_strlen_2d(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
