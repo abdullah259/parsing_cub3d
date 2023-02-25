@@ -106,3 +106,24 @@ int	ft_strlen_2d(char **str)
 		i++;
 	return (i);
 }
+
+void	free_all(t_data *data)
+{
+	obj_status(data, 0, 0, 1);
+	if (!data)
+		return ;
+	if (data->player.rays)
+	{
+		clear_ray_obj(data, 0);
+		free(data->player.rays);
+	}
+	if (data->win)
+		mlx_destroy_window(data->mlx, data->win);
+	if (data->map)
+		free_2d(&(data->map));
+	free_imgs(data);
+	free_text(data);
+	if (data->mlx)
+		free(data->mlx);
+	free(data);
+}
