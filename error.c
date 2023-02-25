@@ -127,3 +127,32 @@ void	free_all(t_data *data)
 		free(data->mlx);
 	free(data);
 }
+
+
+int	close_window(t_data *data)
+{
+	free_all(data);
+	exit(EXIT_SUCCESS);
+}
+
+void	free_text(t_data *data)
+{
+	if (data->no_path)
+		free(data->no_path);
+	if (data->so_path)
+		free(data->so_path);
+	if (data->we_path)
+		free(data->we_path);
+	if (data->ea_path)
+		free(data->ea_path);
+}
+
+void	free_imgs(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 32)
+		if (data->img[i].img)
+			mlx_destroy_image(data->mlx, data->img[i].img);
+}
