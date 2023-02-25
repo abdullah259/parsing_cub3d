@@ -156,3 +156,31 @@ void	free_imgs(t_data *data)
 		if (data->img[i].img)
 			mlx_destroy_image(data->mlx, data->img[i].img);
 }
+
+
+int	obj_status(t_data *data, int x, int y, int to_do)
+{
+	static int	**obj_map;
+	int			i;
+
+	if (!obj_map)
+	{
+		i = 0;
+		obj_map = ft_calloc(data->map_height, sizeof(int *));
+		while (i < data->map_height)
+			obj_map[i++] = ft_calloc(data->map_width, sizeof(int));
+	}
+	if (to_do == 1)
+	{
+		i = -1;
+		while (++i < data->map_height)
+			if (obj_map[i])
+				free(obj_map[i]);
+		if (obj_map)
+			free(obj_map);
+		return (0);
+	}
+	if (to_do > 2)
+		obj_map[y][x] = to_do;
+	return (obj_map[y][x]);
+}
